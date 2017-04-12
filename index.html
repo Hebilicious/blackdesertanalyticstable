@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css">
+    <!-- HandsontableCss -->
+    <link rel="stylesheet" href="node_modules/handsontable/dist/handsontable.full.css">
+  </head>
+  <body>
+  <nav class="navbar navbar-toggleable-md fixed-top navbar-inverse bg-inverse">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#"><b>BDO</b>Analytics</a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Lifeskill Streamers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Future Development</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Lifeskill Patch Notes</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Active Lifeskills
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/imperial_alchemy.php">Imperial Alchemy</a>
+            <a class="dropdown-item" href="#">Imperial Cooking</a>
+            <a class="dropdown-item" href="#">Cooking</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Semi-Active Lifeskills</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">AFK Lifeskills</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Miscellaneous</a>
+        </li>
+      </ul>
+      <a class="discord_link" href=""><img style="max-width:127px;position:relative;top:4px;"src="http://i.imgur.com/r6KWWSh.png"></a>
+    </div>
+  </nav>
+
+    <div class="container-fluid" style="margin-top: 60px;">
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-sm-12">
+          <div class="card card-inverse" style="margin-top:20px;background:#0f0f0f;">
+            <!-- <img class="card-img-top img-fluid" src="http://blackdesertanalytics.com/images/indexbanner.jpg" alt="Card image cap"> -->
+            <div class="card-block">
+              <h3 class="card-title text-center">Imperial Alchemy Crate Profits</h3>
+
+                <div class="col-md-12 col-sm-12">
+                  <!-- Datatable layout -->
+                  <table class="table table-hover table-inverse table-responsive" id="datatableExample"></table>
+
+                </div>
+
+            </div>
+          </div>
+          <!-- Handsontable layout -->
+          <div id="example"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://code.jquery.com/jquery-3.2.1.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  </body>
+  <footer class="footer">
+    <div class="container">
+      <p style="margin-bottom:0px;color:white;">© 2017 Blackdesertanalytics.com. All Rights Reserved. Numbers provided are from the last update's market prices. They may not be accurate as prices often change.<br>Please report any errors to Balzor on NA or to balzor#0546 on discord.</p>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
+    <script src="node_modules/handsontable/dist/handsontable.full.js"></script>
+    <script src="javascript/polyfill.js"></script>
+    <script>
+
+
+    //Here we create the url
+    var baseUrl= "https://script.google.com/macros/s/";
+    var scriptID = "AKfycby7h_V042FT6BEanTkkHE9s5N9Ng0ElGc9Yix0pbAjT_FV2XxQ";
+
+    //This is what needs to be edited to pull in a different spreadsheet
+    var sheetID = "1DTEXNkw7AQrwDhUftA_gGb29W6-JYoq3jUJqQ83vgTA";
+    var sheetName = "Test"
+
+    var ajaxUrl = baseUrl + scriptID + "/exec?id=" + sheetID + '&sheet=' + sheetName + "";
+
+    //Handsontable version
+    function createHandsontable(json){
+      var formattedArray = [];
+      var sheet = json[sheetName];
+      var columnNames = Object.keys(json[sheetName][0]);
+      sheet.forEach(function(sheet){
+        formattedArray.push(Object.values(sheet));
+      })
+      console.log(formattedArray);
+
+      //Handsontable
+      var container = document.getElementById('example');
+      var hot = new Handsontable(container, {
+        data: formattedArray,
+        // dataSchema: json[sheetName],
+        rowHeaders: true,
+        colHeaders: Object.keys(json[sheetName][0])
+      });
+    }
+
+    //Datatable version
+    function createDataTable(json){
+      var formattedArray = [];
+      var formattedColumns = [];
+      var sheet = json[sheetName];
+      var columnNames = Object.keys(json[sheetName][0]);
+      sheet.forEach(function(sheet){
+        formattedArray.push(Object.values(sheet));
+      })
+      columnNames.forEach(function(column){
+        formattedColumns.push({ title: column, className: 'thead-inverse' })
+      })
+      console.log(formattedColumns);
+      $('#datatableExample').DataTable( {
+        data: formattedArray,
+        columns: formattedColumns,
+        paging: false,
+        lengthChange: false,
+        bSort: false
+    } );
+    }
+
+    //Ajax,comment which function you don't wanna use (default datatable is used)
+    const config = {
+    method: 'GET',
+    url: ajaxUrl,
+    dataType: "jsonp",
+    };
+    $.ajax(config).then(function(json){
+      console.log(json);
+      // createHandsontable(json),
+      createDataTable(json)
+    });
+
+    </script>
+  </footer>
+<style>
+body {
+    background-color: #1b1b1b;
+}
+.footer {
+    padding: 5px 0;
+    margin-top: 4rem;
+    font-size: 85%;
+    text-align: center;
+    background-color: #0f0f0f;
+}
+.underlined_title {
+    color: white;
+    border-bottom: 1px solid #565656;
+    padding-bottom: 8px;
+}
+.table.dataTable {
+  border-collapse: collapse!important;
+}
+div#imperial_table_wrapper {
+    display: block!important;
+}
+div.dataTables_wrapper div.dataTables_filter label {
+    display: block!important;
+    text-align: right;
+}
+</style>
+</html>
